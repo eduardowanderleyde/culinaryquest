@@ -67,4 +67,5 @@ gem 'devise'
 gem 'stripe'
 gem 'pundit'
 gem 'sidekiq'
+gem 'faker'
 
