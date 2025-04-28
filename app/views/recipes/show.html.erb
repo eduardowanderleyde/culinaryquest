@@ -1,6 +1,44 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-8">
+  <h1 class="text-3xl font-bold mb-4 text-center"><%= @recipe.name %></h1>
+  <% if @recipe.image.attached? %>
+    <div class="flex justify-center mb-6">
+      <%= image_tag @recipe.image, class: "rounded-lg w-full max-h-80 object-cover" %>
+    </div>
+  <% end %>
+  <div class="mb-4">
+    <span class="inline-block bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-xs mr-2">
+      Dificuldade: <%= @recipe.difficulty %>
+    </span>
+    <span class="inline-block bg-green-200 text-green-800 px-3 py-1 rounded-full text-xs">
+      Tempo: <%= @recipe.cook_time %> min
+    </span>
+  </div>
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Descrição</h2>
+    <p class="text-gray-700"><%= @recipe.description %></p>
+  </div>
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Ingredientes</h2>
+    <ul class="list-disc list-inside text-gray-700">
+      <% @recipe.ingredients.split("\n").each do |ingredient| %>
+        <li><%= ingredient %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="mb-6">
+    <h2 class="text-xl font-semibold mb-2">Modo de Preparo</h2>
+    <ol class="list-decimal list-inside text-gray-700">
+      <% @recipe.instructions.split("\n").each_with_index do |step, i| %>
+        <li class="mb-2"><span class="font-bold">Passo <%= i+1 %>:</span> <%= step %></li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="flex justify-center">
+    <%= link_to "Voltar para receitas", recipes_path, class: "px-6 py-3 bg-yellow-400 hover:bg-yellow-500 text-white font-bold rounded-lg text-lg transition" %>
+  </div>
+</div>
 
 <div>
   <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
